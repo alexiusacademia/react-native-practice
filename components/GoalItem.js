@@ -1,10 +1,16 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 function GoalItem(props) {
+  const onItemPressed = () => {
+    return props.onPressed(props.id);
+  };
+
   return (
-    <View style={styles.listItem}>
-      <Text style={styles.listText}>{props.text}</Text>
-    </View>
+    <Pressable onPress={onItemPressed}>
+      <View style={styles.listItem}>
+        <Text style={styles.listText}>{props.text}</Text>
+      </View>
+    </Pressable>
   );
 }
 

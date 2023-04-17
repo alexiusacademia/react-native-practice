@@ -15,6 +15,16 @@ export default function App() {
     ]);
   };
 
+  const onItemPressed = (key) => {
+    const objIndex = goals.findIndex((obj) => obj.key === key);
+
+    if (objIndex > -1) {
+      updateGoal((currentGoals) =>
+        currentGoals.filter((goal) => goal.key !== key)
+      );
+    }
+  };
+
   return (
     <View style={styles.mainContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -22,7 +32,13 @@ export default function App() {
         <FlatList
           data={goals}
           renderItem={(item) => {
-            return <GoalItem text={item.item.text} />;
+            return (
+              <GoalItem
+                text={item.item.text}
+                onPressed={onItemPressed}
+                id={item.item.key}
+              />
+            );
           }}
         />
       </View>
